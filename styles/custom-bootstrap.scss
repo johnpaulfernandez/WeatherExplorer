@@ -1,0 +1,36 @@
+$rosewood: #660011;
+$wine: #812E3C;
+$spanish-gray: #919098;
+$isabelline: #F1ECED;
+$licorice: #141210;
+
+$theme-colors: (
+  "primary": $rosewood,
+  "info": #0074d9
+);
+
+
+.container-fluid {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.card {
+  border: none
+}
+
+.form-control {
+  background-color: rgb(45, 45, 45);;
+  border: none
+}
+
+a{
+  color: $isabelline;
+}
+
+a:hover {
+  color: $spanish-gray;
+  text-decoration: none
+}
+
+
