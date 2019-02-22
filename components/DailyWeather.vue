@@ -3,6 +3,7 @@
     <div class="card">
       <header>
         <chartjs-line
+          v-if="showLine"
           :easing="easing"
           :pointborderwidth="pointborderwidth"
           :pointbordercolor="pointbordercolor"
@@ -29,6 +30,7 @@ export default {
   props: ['weather'],
   data () {
     return {
+      showLine: false,
       weatherDates: [],
       weatherTemps: [],
       bgColor: 'rgb(255, 245, 204)',
@@ -41,6 +43,7 @@ export default {
       pointhoverbordercolor: 'rgb(255, 204, 0)',
 
       option: {
+        showLine: false,
         responsive: true,
         maintainAspectRatio: true,
         showAllTooltips: true,
@@ -89,6 +92,9 @@ export default {
   },
   created () {
     this.filterByDay()
+  },
+  mounted () {
+    this.showLine = true // showLine will only be set to true on the client. This keeps the DOM-tree in sync.
   },
   methods: {
     filterByDay (day) {
