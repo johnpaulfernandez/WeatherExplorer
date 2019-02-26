@@ -1,11 +1,10 @@
 <template>
   <section class="container">
-    <Home :weather="weather"/>
+    <Home :weather="$store.state.location.weather"/>
   </section>
 </template>
 
 <script>
-import axios from '~/plugins/axios'
 import Home from '~/components/Home.vue'
 
 export default {
@@ -17,16 +16,19 @@ export default {
   components: {
     Home
   },
-  asyncData ({ params, store }) {
-    return axios
-      .get('/api/forecast/', {
-        params: {
-          zip: store.state.location.location
-        }
-      })
-      .then(res => {
-        return { weather: res.data }
-      })
+  async fetch ({ store }) {
+    await store.dispatch('location/getWeather')
+  },
+  mounted () {
+    this.$store.subscribe((mutation, state) => {
+      switch (mutation.type) {
+        case 'location/update':
+          console.log(`subscribe ${state.location.location}`)
+
+          this.$store.dispatch('location/getWeather', state.location.location)
+          break
+      }
+    })
   },
   head () {
     return {
