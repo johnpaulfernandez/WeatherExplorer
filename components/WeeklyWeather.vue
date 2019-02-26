@@ -100,14 +100,13 @@ export default {
   },
   created () {
     this.filterByWeekUsingHighCharts()
-    // this.filterByDay(moment(new Date().getDay()).format("ddd"));
     this.get5Days()
   },
   methods: {
     get5Days () {
       this.daysOfWeek = []
-      // let dayNumber = moment(this.weather[0][0] * 1000).isoWeekday()
-      let nextDay = this.weather[0][0]
+
+      let nextDay = this.weather.date[0]
 
       for (let i = 1; i <= 5; i += 1) {
         nextDay = moment().day(moment(nextDay).isoWeekday() + 1) // returns a moment date object
@@ -115,7 +114,7 @@ export default {
       }
     },
     filterByDay (day) {
-      const startIdx = this.weather[0].findIndex(
+      const startIdx = this.weather.date.findIndex(
         date =>
           moment(date).isoWeekday() ===
           moment()
@@ -128,7 +127,7 @@ export default {
       this.weatherDates = this.weatherTime
 
       for (let i = startIdx; i < startIdx + 8; i += 1) {
-        this.weatherTemps.push(this.weather[1][i])
+        this.weatherTemps.push(this.weather.tempMax[i])
       }
     },
     filterByWeekUsingHighCharts () {
@@ -136,10 +135,10 @@ export default {
       this.weatherHourly = []
       this.weatherTemps = []
 
-      for (let i = 0; i < this.weather[0].length; i += 1) {
-        this.weatherDates.push(moment(this.weather[0][i]).format('ddd - hA'))
+      for (let i = 0; i < this.weather.date.length; i += 1) {
+        this.weatherDates.push(moment(this.weather.date[i]).format('ddd - hA'))
 
-        this.weatherTemps.push(this.weather[1][i])
+        this.weatherTemps.push(this.weather.tempMax[i])
       }
     }
   },

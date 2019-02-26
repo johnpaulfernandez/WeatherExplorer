@@ -5,13 +5,13 @@
       <p class="subtitle mb-0">Friday</p>
 
       <h1 class="mt-3">
-        {{ weather[1][0] }} °F
-        <img :src="`${BASE_IMAGE_URL}${weather[3][0]}.png`">
+        {{ weather.tempMax[0] }} °F
+        <img :src="`${BASE_IMAGE_URL}${weather.icon[0]}.png`">
       </h1>
 
-      <p class="mb-0 text-uppercase">{{ weather[4][0] }}</p>
-      <span class="subtitle mb-0">High {{ weather[1][0] }} °F /</span>
-      <span class="subtitle mb-0">Low {{ weather[2][0] }} °F</span>
+      <p class="mb-0 text-uppercase">{{ weather.description[0] }}</p>
+      <span class="subtitle mb-0">High {{ weather.tempMax[0] }} °F /</span>
+      <span class="subtitle mb-0">Low {{ weather.tempMin[0] }} °F</span>
 
       <p class="mt-5 mb-0">Humidity: 70%</p>
       <p class="mb-0">Wind: Calm, 1.0 m/s, South (180)</p>

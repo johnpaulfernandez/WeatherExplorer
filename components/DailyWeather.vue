@@ -43,7 +43,6 @@ export default {
       pointhoverbordercolor: 'rgb(255, 204, 0)',
 
       option: {
-        showLine: false,
         responsive: true,
         maintainAspectRatio: true,
         showAllTooltips: true,
@@ -104,13 +103,14 @@ export default {
       this.weatherDates = []
       this.weatherTemps = []
 
-      for (let i = 0; i < this.weather[0].length; i += 1) {
-        let date = moment(this.weather[0][i]).date()
+      console.log(this.weather.date)
+      for (let i = 0; i < this.weather.date.length; i += 1) {
+        let date = moment(this.weather.date[i]).date()
         if (date === today || date === today + 1) {
-          let hour = moment(this.weather[0][i]).hour()
+          let hour = moment(this.weather.date[i]).hour()
 
           this.weatherDates.push(moment(hour, 'h:mm A').format('h A'))
-          this.weatherTemps.push(this.weather[1][i])
+          this.weatherTemps.push(this.weather.tempMax[i])
         }
       }
     },
@@ -121,20 +121,20 @@ export default {
 
       console.log(prevDay)
 
-      for (let i = 0; i < this.weather[0].length; i += 1) {
-        let day = moment(this.weather[0][i]).day()
+      for (let i = 0; i < this.weather.date.length; i += 1) {
+        let day = moment(this.weather.date[i]).day()
 
         console.log(day)
 
         if (day === prevDay) {
           this.weatherDates.push('')
         } else {
-          this.weatherDates.push(moment(this.weather[0][i]).format('ddd'))
+          this.weatherDates.push(moment(this.weather.date[i]).format('ddd'))
           prevDay = day
         }
       }
 
-      this.weatherTemps = this.weather[1]
+      this.weatherTemps = this.weather.tempMax
     }
   }
 }

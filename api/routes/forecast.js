@@ -11,7 +11,7 @@ router.get('/forecast', async (req, res, next) => {
     `http://api.openweathermap.org/data/2.5/forecast?zip=${req.query.zip},us&units=imperial&appid=f610b9aea2e131f1fb86bb24bfb660eb`
   )
 
-  let weatherParsed = []
+  let weatherParsed = {}
   let tempMax = weather.data.list.map(res => Math.floor(res.main.temp_max))
   let tempMin = weather.data.list.map(res => Math.floor(res.main.temp_min))
   let icon = weather.data.list.map(res => res.weather[0].icon)
@@ -24,7 +24,14 @@ router.get('/forecast', async (req, res, next) => {
     let jsdate = new Date(res * 1000)
     weatherDates.push(jsdate)
   })
-  weatherParsed.push(weatherDates, tempMax, tempMin, icon, description, rain)
+  weatherParsed.id = weather.data.message
+  weatherParsed.date = weatherDates
+  weatherParsed.tempMax = tempMax
+  weatherParsed.tempMin = tempMin
+  weatherParsed.icon = icon
+  weatherParsed.description = description
+  weatherParsed.rain = rain
+  console.log(weatherParsed)
   res.json(weatherParsed)
 })
 
