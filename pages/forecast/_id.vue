@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <WeeklyWeather :weather="weather"/>
+    <WeeklyWeather :weather="$store.state.location.weather" :key="$store.state.location.weather.id"/>
   </section>
 </template>
 

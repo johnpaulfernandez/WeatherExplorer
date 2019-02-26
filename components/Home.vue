@@ -4,7 +4,7 @@
       <div class="col-md-3">
         <WeatherInfo :weather="weather"/>
       </div>
-      <div class="col-md-9">
+      <div class="col-md-9" :key="$store.state.location.weather.id">
         <DailyWeather :weather="weather"/>
       </div>
     </div>
