@@ -22,14 +22,14 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ['~/plugins/axios', { src: '~/plugins/chart', ssr: false }, '~/plugins/fontawesome.js', '~/plugins/highcharts-vue.js'
+  plugins: ['~/plugins/axios', { src: '~/plugins/chart', ssr: false }, '~/plugins/fontawesome.js', '~/plugins/highcharts-vue.js', '~/plugins/google-maps'
   ],
   /*
   ** Nuxt.js modules
   */
   modules: [
     '@nuxtjs/dotenv',
-  // Doc: https://github.com/nuxt-community/axios-module#usage
+    // Doc: https://github.com/nuxt-community/axios-module#usage
     ['@nuxtjs/axios', {
       baseURL: process.env.BASE_URL
     }],
