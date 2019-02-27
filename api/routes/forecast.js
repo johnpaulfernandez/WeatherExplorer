@@ -31,7 +31,6 @@ router.get('/forecast', async (req, res, next) => {
   weatherParsed.icon = icon
   weatherParsed.description = description
   weatherParsed.rain = rain
-  console.log(weatherParsed)
   res.json(weatherParsed)
 })
 

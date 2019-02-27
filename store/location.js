@@ -6,8 +6,6 @@ export const state = () => ({
 export const mutations = {
   update (state, zip) {
     state.location = zip
-    // console.log(`Store zip ${zip}`)
-    // console.log(`Store state.location ${state.location}`)
   },
   setWeather (state, weather) {
     state.weather = weather
@@ -16,7 +14,6 @@ export const mutations = {
 
 export const actions = {
   async getWeather ({ commit, state }) {
-    // console.log(`getWeather ${state.location}`)
     await this.$axios.get('/api/forecast/', {
       params: {
         zip: state.location

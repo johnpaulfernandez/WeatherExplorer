@@ -103,7 +103,6 @@ export default {
       this.weatherDates = []
       this.weatherTemps = []
 
-      console.log(this.weather.date)
       for (let i = 0; i < this.weather.date.length; i += 1) {
         let date = moment(this.weather.date[i]).date()
         if (date === today || date === today + 1) {
@@ -113,28 +112,6 @@ export default {
           this.weatherTemps.push(this.weather.tempMax[i])
         }
       }
-    },
-    filterByWeek () {
-      this.weatherDates = []
-      this.weatherTemps = []
-      let prevDay = new Date().getDay() - 1
-
-      console.log(prevDay)
-
-      for (let i = 0; i < this.weather.date.length; i += 1) {
-        let day = moment(this.weather.date[i]).day()
-
-        console.log(day)
-
-        if (day === prevDay) {
-          this.weatherDates.push('')
-        } else {
-          this.weatherDates.push(moment(this.weather.date[i]).format('ddd'))
-          prevDay = day
-        }
-      }
-
-      this.weatherTemps = this.weather.tempMax
     }
   }
 }

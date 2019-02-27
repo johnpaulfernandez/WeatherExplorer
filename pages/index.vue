@@ -16,20 +16,6 @@ export default {
   components: {
     Home
   },
-  async fetch ({ store }) {
-    await store.dispatch('location/getWeather')
-  },
-  mounted () {
-    this.$store.subscribe((mutation, state) => {
-      switch (mutation.type) {
-        case 'location/update':
-          console.log(`subscribe ${state.location.location}`)
-
-          this.$store.dispatch('location/getWeather', state.location.location)
-          break
-      }
-    })
-  },
   head () {
     return {
       title: 'Weather Explorer'
