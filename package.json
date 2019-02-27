@@ -21,6 +21,7 @@
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.13",
     "cross-env": "^5.0.1",
+    "dotenv": "^6.2.0",
     "express": "^4.15.3",
     "hchs-vue-charts": "^1.2.8",
     "highcharts": "^7.0.3",

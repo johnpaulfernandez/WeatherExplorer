@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 module.exports = {
   /*
   ** Headers of the page
@@ -20,14 +22,16 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [{ src: '~/plugins/chart', ssr: false }, '~/plugins/fontawesome.js', '~/plugins/highcharts-vue.js'
+  plugins: ['~/plugins/axios', { src: '~/plugins/chart', ssr: false }, '~/plugins/fontawesome.js', '~/plugins/highcharts-vue.js'
   ],
   /*
   ** Nuxt.js modules
   */
   modules: [
   // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios',
+    ['@nuxtjs/axios', {
+      baseURL: process.env.BASE_URL
+    }],
     // Doc: https://bootstrap-vue.js.org/docs/
     'bootstrap-vue/nuxt'
   ],
