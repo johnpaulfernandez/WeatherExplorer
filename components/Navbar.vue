@@ -46,6 +46,7 @@ export default {
   methods: {
     submit () {
       this.setLocation(this.location)
+      this.$store.dispatch('location/getWeather')
     },
 
     ...mapMutations({
