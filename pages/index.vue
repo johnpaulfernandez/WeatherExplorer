@@ -1,8 +1,8 @@
 <template>
   <section class="container">
-    <Home :weather="$store.state.location.weather"/>
+    <Home v-if="showChart"/>
     <hr>
-    <Map></Map>
+    <Map v-if="showChart"></Map>
   </section>
 </template>
 
@@ -12,7 +12,7 @@ import Map from '~/components/Map.vue'
 
 export default {
   data () {
-    return {}
+    return {showChart: false}
   },
   components: {
     Home,
@@ -22,6 +22,9 @@ export default {
     return {
       title: 'Weather Explorer'
     }
+  },
+  mounted () {
+    this.showChart = true // Will only be set to true on the client. This keeps the DOM-tree in sync.
   }
 }
 </script>

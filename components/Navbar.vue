@@ -8,7 +8,7 @@
         </b-navbar-brand>
         <b-collapse is-nav id="nav_collapse">
           <b-navbar-nav class="ml-5">
-            <nuxt-link :to="{path: `/forecast/${$store.state.location.location}` }" class="nav-link">More Forecasts</nuxt-link>
+            <nuxt-link :to="{path: `/forecast/${getLocation}` }" class="nav-link">More Forecasts</nuxt-link>
           </b-navbar-nav>
 
           <b-navbar-nav class="ml-auto" @submit.prevent="submit">
@@ -32,24 +32,18 @@ export default {
     }
   },
   computed: {
-    newLocation: {
-      get () {
-        return this.$store.location.location
-      },
-      set (location) {
-        this.$store.dispatch('location/update', location)
-      }
+    getLocation () {
+      return this.$store.state.forecast.location
     }
   },
-
   methods: {
     submit () {
       this.setLocation(this.location)
-      this.$store.dispatch('location/getWeather')
+      this.$store.dispatch('forecast/getWeather')
     },
 
     ...mapMutations({
-      setLocation: 'location/update'
+      setLocation: 'forecast/updateLocation'
     })
   }
 }

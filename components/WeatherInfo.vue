@@ -1,7 +1,7 @@
 <template>
   <section class="container weather-info text-light">
     <div>
-      <h4 class="pt-5 mb-0">Weather in {{$store.state.location.location}}</h4>
+      <h4 class="pt-5 mb-0">Weather in {{ location }}</h4>
       <p class="subtitle mb-0">Friday</p>
 
       <h1 class="mt-3">
@@ -25,9 +25,14 @@
 
 <script>
 export default {
-  props: ['weather'],
   computed: {
-    BASE_IMAGE_URL: () => 'http://openweathermap.org/img/w/'
+    BASE_IMAGE_URL: () => 'http://openweathermap.org/img/w/',
+    weather () {
+      return this.$store.state.forecast.weather
+    },
+    location () {
+      return this.$store.state.forecast.location
+    }
   }
 }
 </script>

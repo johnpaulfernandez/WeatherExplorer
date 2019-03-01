@@ -3,7 +3,6 @@
     <div class="card">
       <header>
         <chartjs-line
-          v-if="showLine"
           :easing="easing"
           :pointborderwidth="pointborderwidth"
           :pointbordercolor="pointbordercolor"
@@ -27,10 +26,8 @@
 const moment = require('moment')
 
 export default {
-  props: ['weather'],
   data () {
     return {
-      showLine: false,
       weatherDates: [],
       weatherTemps: [],
       bgColor: 'rgb(255, 245, 204)',
@@ -89,11 +86,13 @@ export default {
       }
     }
   },
+  computed: {
+    weather () {
+      return this.$store.state.forecast.weather
+    }
+  },
   created () {
     this.filterByDay()
-  },
-  mounted () {
-    this.showLine = true // showLine will only be set to true on the client. This keeps the DOM-tree in sync.
   },
   methods: {
     filterByDay () {

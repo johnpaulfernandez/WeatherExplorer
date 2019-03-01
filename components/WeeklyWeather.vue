@@ -23,7 +23,6 @@
 const moment = require('moment')
 
 export default {
-  props: ['weather'],
   data () {
     return {
       weatherDates: [],
@@ -105,6 +104,11 @@ export default {
           ]
         }
       }
+    }
+  },
+  computed: {
+    weather () {
+      return this.$store.state.forecast.weather
     }
   },
   created () {

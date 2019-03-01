@@ -4,7 +4,7 @@ export const state = () => ({
 })
 
 export const mutations = {
-  update (state, zip) {
+  updateLocation (state, zip) {
     state.location = zip
   },
   setWeather (state, weather) {

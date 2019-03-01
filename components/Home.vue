@@ -2,16 +2,16 @@
   <section class>
     <div class="row mt-5">
       <div class="col-md-3">
-        <WeatherInfo :weather="weather"/>
+        <WeatherInfo/>
       </div>
-      <div class="col-md-9 mb-5" :key="$store.state.location.weather.id">
+      <div class="col-md-9 mb-5" :key="$store.state.forecast.weather.id">
         <div>
           <b-tabs content-class="mt-3">
             <b-tab title="NEXT 24 HOURS" active>
-              <DailyWeather :weather="weather"/>
+              <DailyWeather/>
             </b-tab>
             <b-tab title="NEXT 5 DAYS" class="font-weight-bold">
-              <WeeklyWeather :weather="weather"/>
+              <WeeklyWeather/>
             </b-tab>
           </b-tabs>
         </div>
@@ -26,7 +26,6 @@ import WeatherInfo from '~/components/WeatherInfo.vue'
 import WeeklyWeather from '~/components/WeeklyWeather.vue'
 
 export default {
-  props: ['weather'],
   components: {
     DailyWeather,
     WeatherInfo,
