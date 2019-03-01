@@ -8,8 +8,7 @@
         </b-navbar-brand>
         <b-collapse is-nav id="nav_collapse">
           <b-navbar-nav class="ml-5">
-            <nuxt-link :to="{path: `/forecast/${$store.state.location.location}` }" class="nav-link">5-Day Forecast</nuxt-link>
-            <nuxt-link to="/map" class="nav-link ml-3">Map</nuxt-link>
+            <nuxt-link :to="{path: `/forecast/${$store.state.location.location}` }" class="nav-link">More Forecasts</nuxt-link>
           </b-navbar-nav>
 
           <b-navbar-nav class="ml-auto" @submit.prevent="submit">

@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section>
     <div class="card">
       <header>
         <chartjs-line
@@ -96,21 +96,15 @@ export default {
     this.showLine = true // showLine will only be set to true on the client. This keeps the DOM-tree in sync.
   },
   methods: {
-    filterByDay (day) {
-      var today = new Date().getDate()
-      if (day === 'tomorrow') today += 1
-
+    filterByDay () {
       this.weatherDates = []
       this.weatherTemps = []
 
-      for (let i = 0; i < this.weather.date.length; i += 1) {
-        let date = moment(this.weather.date[i]).date()
-        if (date === today || date === today + 1) {
-          let hour = moment(this.weather.date[i]).hour()
+      for (let i = 0; i < 9; i += 1) {
+        let hour = moment(this.weather.date[i]).hour()
 
-          this.weatherDates.push(moment(hour, 'h:mm A').format('h A'))
-          this.weatherTemps.push(this.weather.tempMax[i])
-        }
+        this.weatherDates.push(moment(hour, 'h:mm A').format('h A'))
+        this.weatherTemps.push(this.weather.tempMax[i])
       }
     }
   }

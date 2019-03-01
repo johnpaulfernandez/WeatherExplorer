@@ -1,12 +1,21 @@
 <template>
   <section>
-    <highcharts :options="chartOptions"></highcharts>
-    <div v-for="(value, index) in daysOfWeek" :key="index" style="display:inline-block;">
-      <span>
-        <button class="btn btn-light" @click="filterByDay(value)">{{ value }}</button>
-      </span>
+    <div class="row">
+      <div class="col-12 d-flex">
+        <b-button-group class="mb-3 ml-auto mr-4">
+          <div v-for="(value, index) in daysOfWeek" :key="index">
+            <span>
+              <b-button class="btn btn-light ml-3" :ref="'dayFilter' + index" @click="filterByDay(value, index)">{{ value }}</b-button>
+            </span>
+          </div>
+          <b-button class="btn btn-light ml-3 active" ref="dayFilter5" @click="filterByWeekUsingHighCharts()">5 Days</b-button>
+        </b-button-group>
+      </div>
     </div>
-    <button class="btn btn-light" @click="filterByWeekUsingHighCharts">All Week</button>
+
+    <div>
+      <highcharts :options="chartOptions"></highcharts>
+    </div>
   </section>
 </template>
 
@@ -19,15 +28,15 @@ export default {
     return {
       weatherDates: [],
       weatherTemps: [],
-      weatherHourly: [],
-      weatherTime: ['1 AM', '4 AM', '7 AM', '10 AM', '1 PM', '4 PM', '7 PM', '10 PM'],
       daysOfWeek: [],
+      xAxisLabelFormat: '',
+      lastChartShown: 'dayFilter5',
       chartOptions: {
         chart: {
           type: 'areaspline'
         },
         title: {
-          text: '5-Day Weather Forecast'
+          text: null
         },
 
         subtitle: {
@@ -35,20 +44,19 @@ export default {
         },
 
         xAxis: {
-          categories: this.weatherDates
+          categories: this.weatherDates,
+          labels: {
+            format: this.xAxisLabelFormat
+          }
         },
 
         yAxis: {
           title: {
-            text: ''
+            text: null
           },
           max: 100,
-          display: false
-        },
-        legend: {
-          layout: 'vertical',
-          align: 'left',
-          verticalAlign: 'middle'
+          enabled: false,
+          visible: false
         },
         time: {
           useUTC: false
@@ -69,7 +77,8 @@ export default {
           {
             name: '°F',
             data: this.weatherTemps,
-            color: 'rgb(255, 245, 204)'
+            color: 'rgb(255, 245, 204)',
+            showInLegend: false
           }
         ],
 
@@ -113,7 +122,9 @@ export default {
         this.daysOfWeek.push(moment(nextDay).format('ddd'))
       }
     },
-    filterByDay (day) {
+    filterByDay (day, index) {
+      this.xAxisLabelFormat = '{value: %I %p}'
+
       const startIdx = this.weather.date.findIndex(
         date =>
           moment(date).isoWeekday() ===
@@ -122,23 +133,42 @@ export default {
             .isoWeekday()
       )
 
-      this.weatherDates = []
       this.weatherTemps = []
-      this.weatherDates = this.weatherTime
+      this.weatherDates = []
 
       for (let i = startIdx; i < startIdx + 8; i += 1) {
         this.weatherTemps.push(this.weather.tempMax[i])
+        this.weatherDates.push(moment(this.weather.date[i]))
+      }
+
+      if (this.lastChartShown === 'dayFilter5') {
+        this.$refs[this.lastChartShown].classList.remove('active')
+      } else {
+        this.$refs[this.lastChartShown]['0'].classList.remove('active')
+      }
+
+      if (this.$refs[`dayFilter${index}`]['0'].classList !== undefined) {
+        this.$refs[`dayFilter${index}`]['0'].classList.add('active')
+        this.lastChartShown = `dayFilter${index}`
       }
     },
     filterByWeekUsingHighCharts () {
       this.weatherDates = []
-      this.weatherHourly = []
       this.weatherTemps = []
+      this.xAxisLabelFormat = '{value: %e}'
 
       for (let i = 0; i < this.weather.date.length; i += 1) {
-        this.weatherDates.push(moment(this.weather.date[i]).format('ddd - hA'))
-
+        this.weatherDates.push(moment(this.weather.date[i]))
         this.weatherTemps.push(this.weather.tempMax[i])
+      }
+
+      if (this.lastChartShown !== 'dayFilter5') {
+        this.$refs[this.lastChartShown]['0'].classList.remove('active')
+      }
+
+      if (this.$refs.dayFilter5 !== undefined) {
+        this.$refs.dayFilter5.classList.add('active')
+        this.lastChartShown = 'dayFilter5'
       }
     }
   },
@@ -148,10 +178,16 @@ export default {
     },
     weatherDates () {
       this.chartOptions.xAxis.categories = this.weatherDates
+    },
+    xAxisLabelFormat () {
+      this.chartOptions.xAxis.labels.format = this.xAxisLabelFormat
     }
   }
 }
 </script>
 
 <style>
+.chart-filter {
+  margin-left: auto;
+}
 </style>
