@@ -22,7 +22,7 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ['~/plugins/axios', { src: '~/plugins/chart', ssr: false }, '~/plugins/fontawesome.js', '~/plugins/highcharts-vue.js', '~/plugins/google-maps'
+  plugins: ['~/plugins/axios', { src: '~/plugins/chart', ssr: false }, '~/plugins/fontawesome.js', '~/plugins/highcharts-vue.js', { src: '~/plugins/google-maps', ssr: false }
   ],
   /*
   ** Nuxt.js modules
