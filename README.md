@@ -15,4 +15,7 @@ $ npm run dev
 $ npm start
 ```
 
+## Video Walkthrough
+<img src='https://i.imgur.com/BtdIvdt.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
